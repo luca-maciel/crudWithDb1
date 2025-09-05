@@ -13,7 +13,7 @@ import javax.swing.*;
 //        id SERIAL PRIMARY KEY NOT NULL UNIQUE,
 //        author_id INT NOT NULL,
 //        title VARCHAR(255) NOT NULL UNIQUE,
-//gender VARCHAR(255) NOT NULL,
+//        gender VARCHAR(255) NOT NULL,
 //
 //FOREIGN KEY (author_id) references Author(id)
 //        );
@@ -199,6 +199,7 @@ public class Main {
                 Statement statement = conn.createStatement();
                 ResultSet result = statement.executeQuery("SELECT * FROM author WHERE id="+target_id+";");
                 if (Boolean.parseBoolean(String.valueOf(result.next()))){
+                    statement.executeUpdate("DELETE FROM book WHERE author_id="+target_id+";");
                     statement.executeUpdate("DELETE FROM author WHERE id="+target_id+";");
                     JOptionPane.showMessageDialog(null, "Autor deletado com sucesso");
                 }
